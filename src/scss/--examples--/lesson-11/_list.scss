@@ -1,0 +1,32 @@
+@use "sass:list";
+
+$numbers: 10px, 12px, 14px;
+@debug list.nth($numbers, 2);
+
+$list: red green black white;
+@debug list.length($list);
+
+$sizes: 50px 70px 100px;
+
+@each $size in $sizes {
+  .icon-#{$size} {
+    font-size: $size;
+    height: $size;
+    width: $size;
+  }
+}
+
+$button-types: "btn-xm" "btn-lg" "btn-sm" "btn-xl";
+
+@mixin btn-size($types) {
+  @for $i from 1 through list.length($types) {
+    #{list.nth($types, $i)} {
+      $factor: ($i * 5 - 5);
+
+      padding: (5px * $factor) (10px * $factor);
+      border-radius: (10px * $factor);
+    }
+  }
+}
+
+@include btn-size($button-types);
